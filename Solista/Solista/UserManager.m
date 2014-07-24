@@ -24,7 +24,7 @@
             //TODO
         } else {
             NSString *errorString = [error userInfo][@"error"];
-            NSLog(@"errorString: %@", errorString);
+            // NSLog(@"errorString: %@", errorString);
         }
     }];
 }
@@ -51,7 +51,7 @@
 - (void)editUserProfileFromUserID:(NSString *)userID{
     User *actualUser = [[User alloc]init];
     actualUser.userID = userID;
-
+    
     PFQuery *query = [PFQuery queryWithClassName:@"User"];
     [query getObjectInBackgroundWithId:actualUser.userID block:^(PFObject *object, NSError *error) {
         object[@"firstName"] = @"";
@@ -61,7 +61,7 @@
         object[@"password"] = @"";
         object[@"avatar"] = @"";
         [object addUniqueObjectsFromArray:@[@"", @""] forKey:@"friends"];
-
+        
         [object saveInBackground];
     }];
 }
